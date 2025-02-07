@@ -6,6 +6,6 @@ app.get('/test', (req, res) => {
 });
 
 const port = 8080;
-app.listen(8080, () => {
+app.listen(3000, "0.0.0.0", () => {
     console.log(`🚀 Server running on http://localhost:${port}`);
 })

@@ -21,3 +21,5 @@ router.post("/userDetails", async (req, res) => {
     } catch (err) {
     }
 });
+
+module.exports = router;

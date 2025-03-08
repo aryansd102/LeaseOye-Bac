@@ -14,7 +14,7 @@ mongoose
   .catch((err) => console.log(err));
 
 const authRoutes = require("./routes/auth");
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 
 app.get('/test', (req, res) => {
     res.send("hello this is lease oye testing api");

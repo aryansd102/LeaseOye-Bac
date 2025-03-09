@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const { usersDB } = require("./db");
-
+const { userDetailsDB } = require("../db/db");
 
 const UserDetailsSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,4 +8,4 @@ const UserDetailsSchema = new mongoose.Schema({
   birthday: {type: Date, required: true}
 }, { timestamps: true });
 
-module.exports = usersDB.model("UserDetails", UserDetailsSchema);
+module.exports = userDetailsDB.model("UserDetails", UserDetailsSchema);

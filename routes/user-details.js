@@ -1,6 +1,4 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const UserDetails = require("../models/UserDetails");
 
 const router = express.Router();
@@ -18,7 +16,9 @@ router.post("/userDetails", async (req, res) => {
             birthday: userDetails.birthday
          });
         await newUserDetails.save();
+        res.status(201).json({ message: "User registered successfully" });
     } catch (err) {
+        res.status(500).json({ message: "Server Error", error: err.message });
     }
 });
 

@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
 // User Signup
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, userId, password } = req.body;
     if (!req.body) {
         return res.status(400).json({message: "Missing data"});
     }
@@ -43,7 +43,7 @@ router.post("/signup", async (req, res) => {
     if (existingUser) return res.status(400).json({ message: "User already exists" });
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({ name, email, userId, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });

@@ -13,7 +13,8 @@ router.post("/userDetails", async (req, res) => {
             name: userDetails.name,
             email: userDetails.email,
             phoneNumber: userDetails.phoneNumber,
-            birthday: userDetails.birthday
+            birthday: userDetails.birthday,
+            userId: userDetails.userId,
          });
         await newUserDetails.save();
         res.status(201).json({ message: "User registered successfully" });

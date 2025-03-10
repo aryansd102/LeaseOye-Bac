@@ -21,4 +21,4 @@ const propertyDetailsDB = mongoose.createConnection(process.env.MONGO_URI_PROPER
 propertyDetailsDB.on("connected", () => console.log("Connected to Property Details Db"));
 propertyDetailsDB.on("error", () => console.log("PropertyDetailsDB Connection Error:", err));
 
-module.exports = { usersDB, userDetailsDB };
+module.exports = { usersDB, userDetailsDB, propertyDetailsDB };

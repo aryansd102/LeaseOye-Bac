@@ -23,4 +23,20 @@ router.post("/userDetails", async (req, res) => {
     }
 });
 
+router.post("/user", async(req, res) => {
+    try {
+        const userId = req.body;
+        if (!req.body) {
+            return res.status(400).json({message: "Missing data"});
+        }
+        const userDetails = UserDetails.findOne({userId});
+        if (!userDetails) {
+            return res.status(400).json("Missing user details");
+        }
+        res.status(201).json({message: "Fetched User details", userDetails})
+    } catch (err) {
+        res.status(500).json({ message: "Server Error", error: err.message });
+    }
+});
+
 module.exports = router;

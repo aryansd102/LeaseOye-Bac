@@ -21,4 +21,11 @@ const propertyDetailsDB = mongoose.createConnection(process.env.MONGO_URI_PROPER
 propertyDetailsDB.on("connected", () => console.log("Connected to Property Details Db"));
 propertyDetailsDB.on("error", () => console.log("PropertyDetailsDB Connection Error:", err));
 
-module.exports = { usersDB, userDetailsDB, propertyDetailsDB };
+const aboutUsDb = mongoose.createConnection(process.env.MONGO_URI_ABOUT_US, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+aboutUsDb.on("connected", () => console.log("Connected to AboutUsDB"));
+aboutUsDb.on("error", () => console.log("AboutUsDB Connection Error", err));
+
+module.exports = { usersDB, userDetailsDB, propertyDetailsDB, aboutUsDb };

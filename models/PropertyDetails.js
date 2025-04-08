@@ -11,6 +11,10 @@ const propertyDetailsSchema = new mongoose.Schema({
     area: { type: String, required: true },
     city: { type: String, required: true },
     country: { type: String, required: true },
+    length: {type: String},
+    breadth: {type: String},
+    description: {type: String},
+    imagePath: [{type: String}]
   }, { timestamps: true });
   
 module.exports = propertyDetailsDB.model("PropertyDetails", propertyDetailsSchema);

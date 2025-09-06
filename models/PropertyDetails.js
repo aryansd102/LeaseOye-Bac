@@ -5,16 +5,17 @@ const propertyDetailsSchema = new mongoose.Schema({
     userId: {type: String, required: true},
     propertyId: {type: String, required: true},
     propertyType: { type: String, required: true },
-    line1: { type: String, required: true, unique: true },
-    line2: { type: String, required: true },
-    landmark: { type: String, required: true },
-    area: { type: String, required: true },
-    city: { type: String, required: true },
-    country: { type: String, required: true },
-    length: {type: String},
-    breadth: {type: String},
-    description: {type: String},
-    imagePath: [{type: String}]
+    address: {type: String, required: true},
+    city: {type: String, required: true},
+    rate: {type: String, required: true},
+    duration: {type: String, required: true},
+    adTitle: {type: String, required: true},
+    adDescription: {type: String, required: true},
+    propertySubType: {type: String, required: true},
+    imagePath: [{type: String}],
+    negotiable: {type: Boolean},
+    area: {type: String},
+    furnishType: {type: String}
   }, { timestamps: true });
-  
+
 module.exports = propertyDetailsDB.model("PropertyDetails", propertyDetailsSchema);

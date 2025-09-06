@@ -30,16 +30,17 @@ router.post("/propertyDetails", async (req, res) => {
             userId: propertyDetails.userId,
             propertyId: propertyDetails.propertyId,
             propertyType: propertyDetails.propertyType,
-            line1: propertyDetails.line1,
-            line2: propertyDetails.line2,
-            landmark: propertyDetails.landmark,
-            area: propertyDetails.area,
+            address: propertyDetails.address,
             city: propertyDetails.city,
-            country: propertyDetails.country,
-            length: propertyDetails.length,
-            breadth: propertyDetails.breadth,
-            description: propertyDetails.description,
-            imagePath: propertyDetails.imagePath
+            adDescription: propertyDetails.adDescription,
+            imagePath: propertyDetails.imagePath,
+            adTitle: propertyDetails.adTitle,
+            propertySubType: propertyDetails.propertySubType,
+            rate: propertyDetails.rate,
+            duration: propertyDetails.duration,
+            negotiable: propertyDetails.negotiable,
+            furnishType: propertyDetails.furnishType,
+            area: propertyDetails.area
          });
         await propertTypeDetails.save();
         res.status(201).json({ message: "Property details saved successfully" });
@@ -83,7 +84,7 @@ router.post("/uploadImage", upload.single("image"), async (req, res) => {
       return res.status(400).json({ message: "Missing imageName or propertyId" });
     }
 
-    const finalPath = path.join(__dirname, "..", "uploads", propertyId);
+    const finalPath = path.join("/var/www/leaseoye.com/uploads", propertyId);
     fs.mkdirSync(finalPath, { recursive: true });
 
     const finalFilePath = path.join(finalPath, req.file.filename);
@@ -97,6 +98,38 @@ router.post("/uploadImage", upload.single("image"), async (req, res) => {
     console.error("Upload Error:", err.message);
     res.status(500).json({ message: "Server error", error: err.message });
   }
+});
+
+router.put("/updatePropertyDetails/:propertyId", async (req, res) => {
+    try {
+        const propertyId = req.params.propertyId;
+        const updateData = req.body;
+
+        if (!propertyId) {
+            return res.status(400).json({ message: "Missing propertyId in the URL" });
+        }
+
+        if (!updateData || Object.keys(updateData).length === 0) {
+            return res.status(400).json({ message: "No data provided to update" });
+        }
+
+        const updatedProperty = await PropertyDetails.findOneAndUpdate(
+            { propertyId: propertyId },
+            { $set: updateData },
+            { new: true } // returns the updated document
+        );
+
+        if (!updatedProperty) {
+            return res.status(404).json({ message: "Property not found" });
+        }
+
+        res.status(200).json({
+            message: "Property details updated successfully",
+            data: updatedProperty
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Server Error", error: err.message });
+    }
 });
 
 module.exports = router;
